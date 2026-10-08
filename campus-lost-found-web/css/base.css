@@ -1,0 +1,151 @@
+/* ============ 设计变量 ============ */
+:root{
+  --black:#1D1D1A;        /* 主黑：选中胶囊、发布按钮 */
+  --primary:#5E9E74;      /* 抹茶绿：品牌点缀、链接 */
+  --primary-dark:#4A855E;
+  --primary-light:#E3EFE4;/* 淡抹茶绿底 */
+  --lost:#D97D52;         /* 柔和陶橙：寻物 */
+  --lost-light:#F8E9DF;
+  --found:#5E9E74;        /* 招领绿 */
+  --found-light:#E3EFE4;
+  --bg:#F4F3ED;           /* 暖米白背景 */
+  --card:#FFFFFF;
+  --ink:#1D1D1A;
+  --ink-2:#6B665B;
+  --ink-3:#A6A094;
+  --line:#ECEAE1;
+  --radius:16px;
+  --shadow:0 2px 12px rgba(60,55,40,.06);
+  --shadow-lg:0 10px 36px rgba(60,55,40,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  background:#DDE3EC;
+  color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;
+  overflow:hidden;
+}
+/* 桌面端背景纹理 */
+body::before{
+  content:"";position:fixed;inset:0;
+  background:radial-gradient(circle at 20% 15%,#E8EEF7 0%,#D7DEE9 55%,#CBD3E0 100%);
+  z-index:-1;
+}
+
+/* ============ 手机外壳 ============ */
+.phone{
+  position:relative;
+  width:390px;height:820px;
+  background:#000;
+  border-radius:48px;
+  padding:12px;
+  box-shadow:0 40px 90px rgba(30,45,70,.35),0 0 0 2px #2a2f3a, inset 0 0 6px rgba(255,255,255,.15);
+  flex-shrink:0;
+}
+.phone-screen{
+  position:relative;
+  width:100%;height:100%;
+  background:var(--bg);
+  border-radius:37px;
+  overflow:hidden;
+}
+/* 刘海 */
+.notch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:150px;height:30px;
+  background:#000;
+  border-radius:0 0 18px 18px;
+  z-index:200;
+}
+/* 状态栏 */
+.statusbar{
+  position:absolute;top:0;left:0;right:0;height:44px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px 0 30px;
+  font-size:14px;font-weight:700;color:var(--ink);
+  z-index:150;pointer-events:none;
+}
+.statusbar .sb-right{display:flex;align-items:center;gap:5px;}
+.statusbar svg{display:block;}
+
+/* 屏幕内容容器 */
+.app{
+  position:absolute;top:44px;left:0;right:0;bottom:0;
+  overflow:hidden;
+}
+.page{
+  position:absolute;inset:0;
+  background:var(--bg);
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+}
+.page.active{display:flex;}
+.page.slide-in{animation:slideIn .28s ease forwards;}
+@keyframes slideIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.page.slide-back{animation:slideBack .28s ease forwards;}
+@keyframes slideBack{from{transform:translateX(0);}to{transform:translateX(100%);}}
+.page.fade-in{animation:fadeIn .25s ease forwards;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============ 通用导航栏 ============ */
+.navbar{
+  height:50px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  background:var(--card);
+  font-size:17px;font-weight:700;
+  border-bottom:1px solid var(--line);
+}
+.navbar .nav-back{
+  position:absolute;left:6px;top:0;bottom:0;width:44px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:none;background:none;
+}
+.navbar .nav-right{
+  position:absolute;right:14px;top:0;bottom:0;
+  display:flex;align-items:center;
+  font-size:14px;font-weight:500;color:var(--primary);
+  cursor:pointer;background:none;border:none;
+}
+
+/* 内容滚动区 */
+.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+.content::-webkit-scrollbar{display:none;}
+
+/* 首页整体滚动：问候区到列表一起滑动，tabbar 固定 */
+.home-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+.home-scroll::-webkit-scrollbar{display:none;}
+#page-home .content{flex:none;overflow:visible;}
+
+/* ============ 底部Tab栏 ============ */
+.tabbar{
+  height:62px;flex-shrink:0;
+  background:rgba(255,255,255,.96);
+  border-top:1px solid var(--line);
+  display:flex;
+  padding-bottom:6px;
+  position:relative;
+}
+.tab-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;font-size:11px;color:var(--ink-3);
+  cursor:pointer;border:none;background:none;
+}
+.tab-item.on{color:var(--primary);font-weight:500;}
+.tab-item.pub{position:relative;}
+.tab-pub-btn{
+  position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(29,29,26,.35);
+  border:3px solid #fff;
+  cursor:pointer;
+}
+.tab-item.pub .tab-label{margin-top:30px;}
+

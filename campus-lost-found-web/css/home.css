@@ -1,0 +1,194 @@
+/* ============ 首页 ============ */
+.home-header{
+  background:#fff;
+  padding:14px 16px 16px;
+  flex-shrink:0;
+}
+.home-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.home-title h1{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:.5px;}
+.home-title .badge{
+  font-size:11px;background:var(--primary-light);color:var(--primary-dark);
+  padding:3px 10px;border-radius:20px;font-weight:500;
+}
+.search-entry{
+  height:40px;background:#F4F3ED;border-radius:20px;
+  display:flex;align-items:center;gap:8px;
+  padding:0 16px;color:var(--ink-3);font-size:13.5px;
+  cursor:pointer;
+}
+/* 功能图标行 */
+.home-quick{display:flex;gap:7px;padding-top:16px;}
+.hq-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  background:#fff;border:1px solid var(--line);border-radius:15px;
+  padding:11px 2px 9px;cursor:pointer;
+  box-shadow:0 3px 10px rgba(29,29,26,.04);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.hq-item:active{transform:scale(.95);box-shadow:0 1px 4px rgba(29,29,26,.06);}
+.hq-ic{display:flex;align-items:center;justify-content:center;width:28px;height:28px;}
+.hq-l{font-size:11px;color:var(--ink);letter-spacing:.2px;}
+/* 分类Tab */
+.seg{
+  display:flex;background:var(--bg);
+  padding:12px 14px 4px;align-items:center;gap:8px;
+  flex-shrink:0;
+}
+.seg-item{
+  border:1px solid var(--line);background:#fff;font-size:13px;color:var(--ink-2);
+  padding:7px 15px;border-radius:18px;cursor:pointer;
+  font-family:inherit;
+}
+.seg-item.on{color:#fff;font-weight:600;background:var(--black);border-color:var(--black);}
+.seg-item .cnt{font-size:11px;margin-left:3px;opacity:.75;}
+.seg-item.on .cnt{opacity:.9;}
+
+/* 信息卡片 */
+.list-wrap{padding:12px 12px 16px;display:flex;flex-direction:column;gap:12px;}
+.info-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:12px;display:flex;gap:12px;
+  box-shadow:var(--shadow);cursor:pointer;
+  transition:transform .12s;
+}
+.info-card:active{transform:scale(.985);}
+.info-thumb{
+  width:84px;height:84px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:38px;position:relative;overflow:hidden;
+}
+.info-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb-lost{background:#F8E9DF;}
+.thumb-found{background:#E3EFE4;}
+.thumb-done{background:#EFEEE8 !important;filter:grayscale(.55);}
+.info-main{flex:1;min-width:0;display:flex;flex-direction:column;}
+.photo-sim{font-size:11px;font-weight:700;color:var(--primary-dark);margin-bottom:2px;}
+.info-tags{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.tag-type{
+  font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;
+}
+.tag-lost{background:var(--lost-light);color:var(--lost);}
+.tag-found{background:var(--found-light);color:var(--found);}
+.tag-status{
+  font-size:11px;padding:2px 8px;border-radius:5px;
+  background:#EFEEE8;color:var(--ink-3);
+}
+.tag-status.done{background:#E3EFE4;color:var(--found);}
+.info-name{
+  font-size:16px;font-weight:700;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:6px;
+}
+.info-meta{
+  margin-top:auto;display:flex;flex-direction:column;gap:4px;
+  font-size:12px;color:var(--ink-3);
+}
+.info-meta .meta-row{display:flex;align-items:center;gap:5px;}
+.info-meta svg{flex-shrink:0;}
+.info-time{margin-left:auto;font-size:11px;}
+.card-btn{
+  margin-left:auto;flex-shrink:0;
+  background:var(--black);color:#fff;border:none;cursor:pointer;
+  font-family:inherit;font-size:11.5px;font-weight:600;letter-spacing:.3px;
+  padding:7px 13px;border-radius:16px;line-height:1;
+  display:inline-flex;align-items:center;
+  box-shadow:0 3px 8px rgba(29,29,26,.18);
+}
+.card-btn:active{opacity:.82;}
+.card-btn.is-done{background:#EFEEE8;color:var(--ink-3);box-shadow:none;font-weight:500;}
+
+/* ============ 首页·品牌问候区 ============ */
+.home-greet{background:var(--bg);padding:16px 16px 0;flex-shrink:0;position:relative;}
+.hg-top{display:flex;align-items:center;justify-content:space-between;}
+.hg-weather{font-size:12.5px;color:var(--ink-2);font-weight:500;letter-spacing:.2px;}
+.hg-add{width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(29,29,26,.08);cursor:pointer;position:relative;}
+.hg-add .dot{position:absolute;top:6px;right:7px;width:8px;height:8px;border-radius:50%;
+  background:var(--lost);border:1.5px solid #fff;}
+.hg-title{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:1px;margin:9px 0 3px;}
+.hg-slogan{font-size:13px;color:var(--ink-3);letter-spacing:.3px;}
+/* 绿色引导 Banner */
+.guide-banner{margin:16px 16px 0;background:linear-gradient(135deg,#DEECDD,#D1E5D3);
+  border-radius:22px;padding:18px 18px 16px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;flex-shrink:0;}
+.gb-en{font-size:11px;font-weight:800;letter-spacing:1.6px;color:var(--primary-dark);opacity:.82;}
+.gb-title{font-size:23px;font-weight:900;color:var(--ink);line-height:1.36;margin:7px 0 13px;max-width:58%;}
+.gb-deco{position:absolute;top:16px;right:12px;width:116px;height:116px;border-radius:50%;
+  background:rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center;}
+.gb-deco::before{content:"";position:absolute;width:94px;height:94px;border-radius:50%;
+  border:2px dashed rgba(94,158,116,.55);}
+.gb-btn{align-self:flex-start;background:var(--black);color:#fff;border:none;cursor:pointer;
+  font-family:inherit;font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:22px;
+  display:inline-flex;align-items:center;gap:6px;box-shadow:0 5px 13px rgba(29,29,26,.22);}
+.gb-btn:active{opacity:.85;}
+/* 首页搜索框 */
+.home-search{margin:14px 16px 0;height:48px;background:#fff;border-radius:24px;
+  display:flex;align-items:center;gap:10px;padding:0 18px;color:var(--ink-3);font-size:14px;
+  cursor:pointer;box-shadow:0 4px 14px rgba(29,29,26,.05);border:1px solid var(--line);}
+/* 区块标题行 */
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:20px 16px 11px;}
+.sec-head h3{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:.3px;}
+.sh-more{font-size:12.5px;color:var(--ink-2);display:inline-flex;align-items:center;gap:2px;cursor:pointer;}
+.mini-filter{display:flex;gap:7px;}
+.mf-pill{border:1px solid var(--line);background:#fff;font-size:12.5px;color:var(--ink-2);
+  padding:6px 13px;border-radius:16px;cursor:pointer;font-family:inherit;}
+.mf-pill.on{background:var(--black);color:#fff;border-color:var(--black);font-weight:600;}
+/* 物品分类快捷入口 */
+.cat-quick{display:flex;gap:9px;padding:0 16px;}
+.cat-item{flex:1;background:#fff;border:1px solid var(--line);border-radius:17px;
+  padding:13px 0 11px;display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;box-shadow:0 4px 12px rgba(29,29,26,.04);transition:transform .12s;}
+.cat-item:active{transform:scale(.94);}
+.cat-ic{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.cat-l{font-size:12.5px;color:var(--ink);font-weight:600;}
+/* 卡片：右箭头 + 小缩略图 + 副行 */
+.card-arrow{flex-shrink:0;align-self:center;color:var(--ink-3);display:flex;}
+.info-card .info-thumb{width:62px;height:62px;border-radius:14px;font-size:30px;}
+.info-sub{font-size:12px;color:var(--ink-3);margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* ============ 消息中心页 ============ */
+.msg-list{padding:6px 14px 18px;display:flex;flex-direction:column;gap:10px;}
+.msg-card{background:#fff;border:1px solid var(--line);border-radius:15px;
+  padding:13px 14px;display:flex;gap:11px;cursor:pointer;box-shadow:0 3px 10px rgba(29,29,26,.04);}
+.msg-card:active{transform:scale(.98);}
+.msg-ic{width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;}
+.msg-body{flex:1;min-width:0;}
+.msg-t{font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;}
+.msg-d{font-size:12px;color:var(--ink-2);margin-top:3px;line-height:1.5;}
+.msg-time{font-size:11px;color:var(--ink-3);flex-shrink:0;}
+/* 校园地图页 */
+.map-tip{display:flex;align-items:center;gap:7px;margin:12px 14px 10px;
+  font-size:12.5px;color:var(--ink-2);background:#fff;border:1px solid var(--line);
+  border-radius:11px;padding:9px 12px;}
+.map-img-wrap{margin:0 14px;border-radius:15px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:var(--shadow);background:#fff;cursor:zoom-in;}
+.map-img-wrap img{width:100%;display:block;}
+.map-hot{margin:18px 14px 22px;}
+.map-hot h3{font-size:14px;font-weight:700;margin-bottom:11px;}
+.map-hot-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.map-hot-tags span{font-size:12.5px;background:#fff;border:1px solid var(--line);
+  padding:7px 13px;border-radius:16px;cursor:pointer;color:var(--ink-2);}
+.map-hot-tags span:active{background:var(--primary-light);color:var(--primary-dark);border-color:var(--primary-light);}
+.map-zoom-mask{position:absolute;inset:0;background:rgba(20,20,18,.94);z-index:300;
+  display:none;flex-direction:column;}
+.map-zoom-mask.show{display:flex;}
+.mz-topbar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px;background:rgba(0,0,0,.38);z-index:6;}
+.mz-hint{font-size:13px;color:rgba(255,255,255,.82);}
+.mz-close{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);
+  color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;
+  padding:7px 14px;border-radius:18px;}
+.mz-close:active{background:rgba(255,255,255,.32);}
+.mz-scroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:16px;}
+.mz-scroll img{width:760px;max-width:none;display:block;border-radius:8px;}
+
+/* 空状态 */
+.empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 30px;color:var(--ink-3);
+}
+.empty svg{margin-bottom:14px;opacity:.5;}
+.empty p{font-size:14px;}
+

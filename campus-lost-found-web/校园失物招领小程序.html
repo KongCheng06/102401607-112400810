@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园失物招领小程序 · 交互原型</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235E9E74'/><path d='M50 22a20 20 0 0 0-20 20v10h-4a4 4 0 0 0-4 4v20a4 4 0 0 0 4 4h48a4 4 0 0 0 4-4V56a4 4 0 0 0-4-4h-4V42a20 20 0 0 0-20-20zm12 30V42a12 12 0 1 0-24 0v10z' fill='white'/></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 需求分析文档面板 ============ -->
+<aside class="doc-panel">
+  <div class="dp-kicker">PRODUCT PROTOTYPE</div>
+  <h2>校园失物招领</h2>
+  <div class="dp-sub">微信小程序 · 可交互原型 · 福州大学</div>
+
+  <div class="dp-block">
+    <h3><span class="dp-no">1</span>主要用户与需求</h3>
+    <div class="dp-persona">
+      <div class="pa-t">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D97D52" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        失主（丢东西的同学）</div>
+      <div class="pa-d">快速发布寻物信息让更多人看到，按物品、地点搜索招领信息，尽快找回失物。</div>
+    </div>
+    <div class="dp-persona">
+      <div class="pa-t">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A855E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        拾获者（捡到东西的同学）</div>
+      <div class="pa-d">方便地发布招领信息并找到失主，让信息被失主看到，而不是只发到自己的小群里。</div>
+    </div>
+    <div class="dp-persona">
+      <div class="pa-t">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        热心围观同学</div>
+      <div class="pa-d">浏览身边的失物招领信息，帮忙辨认、转发线索。</div>
+    </div>
+  </div>
+
+  <div class="dp-block">
+    <h3><span class="dp-no">2</span>解决什么问题</h3>
+    <p>现状依赖班级群、宿舍群、朋友圈，信息<b>分散、易被新消息刷屏覆盖、触达范围有限</b>。本小程序把全校寻物与招领信息<b>集中到一个平台</b>，统一展示、可搜索、可按地点分类筛选，再以 <b>AI 识别、智能匹配、悬赏激励、致谢积分</b>，让失物更快回家。</p>
+  </div>
+
+  <div class="dp-block">
+    <h3><span class="dp-no">3</span>核心功能</h3>
+    <div class="dp-fn-grid">
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>浏览信息</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D97D52" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>发布寻物</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4A855E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>发布招领</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>搜索物品</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>查看详情</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>修改状态</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 7l9 5 9-5-6-3"/><path d="M3 7v6l9 5 9-5V7"/></svg>校园地图</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>消息中心</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20l1-4.6A8.4 8.4 0 1 1 21 11.5Z"/></svg>站内聊天</span>
+      <span class="dp-fn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9z"/><path d="M9 11h6M9 15h4"/></svg>我的发布</span>
+    </div>
+  </div>
+
+  <div class="dp-block">
+    <h3><span class="dp-no">4</span>四大亮点</h3>
+    <div class="hl-list">
+      <div class="hl-card">
+        <span class="hl-ic" style="background:#E3EFE4;color:#4A855E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.2"/></svg></span>
+        <div class="hl-info">
+          <div class="hl-t">拍照识物 <i class="tag-ai">AI</i></div>
+          <div class="hl-d">拍一张照片，在浏览器本地提取视觉向量 + OCR 文字，按图片相似度检索。</div>
+        </div>
+      </div>
+      <div class="hl-card">
+        <span class="hl-ic" style="background:#E3EFE4;color:#4A855E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 4.6L19 9l-4.6 1.9L12 15l-2.4-4.1L5 9l5.1-1.4L12 3Z"/><path d="M19 14v4M17 16h4"/></svg></span>
+        <div class="hl-info">
+          <div class="hl-t">智能匹配 <i class="tag-ai">AI</i></div>
+          <div class="hl-d">寻物与招领自动碰撞：图片 50% + 类别 20% + 地点 15% + 时间 10% + OCR/名称 5%。</div>
+        </div>
+      </div>
+      <div class="hl-card">
+        <span class="hl-ic" style="background:#F6EEDC;color:#B8822E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-4"/></svg></span>
+        <div class="hl-info">
+          <div class="hl-t">悬赏任务 <i class="tag-sp">特色</i></div>
+          <div class="hl-d">急用物品可设悬赏金额，金色标识 + 一键筛选，提高找回几率。</div>
+        </div>
+      </div>
+      <div class="hl-card">
+        <span class="hl-ic" style="background:#F7E9ED;color:#C76B7E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.6c1.5-1.6 2.5-3.2 2.5-5.1A4.4 4.4 0 0 0 12 5.1 4.4 4.4 0 0 0 2 7.5c0 1.9 1 3.5 2.5 5.1L12 20l7.5-7.4Z"/></svg></span>
+        <div class="hl-info">
+          <div class="hl-t">归还致谢 <i class="tag-sp">特色</i></div>
+          <div class="hl-d">一键生成感谢信，拾获者归还 / 收信获爱心积分，让善意传递。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dp-block">
+    <h3><span class="dp-no">5</span>可演示流程</h3>
+    <div class="dp-flow">
+      <div class="fl-step"><span class="fl-dot">1</span><div><div class="fl-t">浏览信息 → 查看详情</div><div class="fl-d">首页切换「全部 / 寻物 / 招领」，点击卡片进入详情。</div></div></div>
+      <div class="fl-step"><span class="fl-dot">2</span><div><div class="fl-t">拍照搜物 → 识别 → 结果</div><div class="fl-d">点搜索条右侧相机，拍一张物品照片，自动识别检索。</div></div></div>
+      <div class="fl-step"><span class="fl-dot">3</span><div><div class="fl-t">发布信息 → 智能匹配 → 成功</div><div class="fl-d">点底部「+」填写发布，系统自动发现可能匹配。</div></div></div>
+      <div class="fl-step"><span class="fl-dot">4</span><div><div class="fl-t">标记完成 → 写 / 收感谢信 → 积分</div><div class="fl-d">「我的」中标记完成，发送或收下感谢信，查看感谢信墙。</div></div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="phone">
+  <div class="phone-screen">
+    <div class="notch"></div>
+    <!-- 状态栏 -->
+    <div class="statusbar">
+      <span id="clock">9:41</span>
+      <span class="sb-right">
+        <svg id="signal-icon" width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="4.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="9" y="2" width="3" height="9" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg>
+        <svg id="wifi-icon" width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.5c2 0 3.9.8 5.3 2.1l1.2-1.3A9 9 0 0 0 8 .7 9 9 0 0 0 1.5 3.3l1.2 1.3A7.5 7.5 0 0 1 8 2.5z" fill="currentColor"/><path d="M8 5.6c1.2 0 2.3.4 3.1 1.2l1.2-1.3a6 6 0 0 0-8.6 0l1.2 1.3A4.4 4.4 0 0 1 8 5.6z" fill="currentColor"/><circle cx="8" cy="9.6" r="1.6" fill="currentColor"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect id="battery-fill" x="2" y="2" width="16" height="8" rx="1.5" fill="currentColor"/><rect x="22.5" y="4" width="1.6" height="4" rx=".8" fill="currentColor" opacity=".5"/></svg>
+      </span>
+    </div>
+
+    <div class="app" id="app">
+      <!-- ============ 页面：首页 ============ -->
+      <div class="page active" id="page-home">
+        <div class="home-scroll">
+        <div class="home-greet">
+          <div class="hg-top">
+            <span class="hg-weather">福州大学 · 旗山校区 · <span id="weather">晴 23°</span></span>
+            <button class="hg-add" onclick="goPublish()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="dot"></span>
+            </button>
+          </div>
+          <div class="hg-title">校园失物招领</div>
+          <div class="hg-slogan">让每一次遗失，都有回家的线索</div>
+        </div>
+
+        <div class="guide-banner">
+          <div class="gb-en">CAMPUS LOST &amp; FOUND</div>
+          <div class="gb-title">今天，帮一件物品回家</div>
+          <div class="gb-deco">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8h11l-1 12h-9l-1-12Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><rect x="10.4" y="11" width="3.2" height="3" rx=".6" fill="#E8B94A" stroke="none"/></svg>
+          </div>
+          <button class="gb-btn" onclick="goMap()">打开校园地图
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+
+        <div class="home-search-row">
+          <button class="home-search" onclick="goSearch()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A6A094" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>搜索物品名称、地点或关键词</span>
+          </button>
+          <button class="home-camera" onclick="quickPhotoSearch()" title="拍照识物">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.2"/></svg>
+          </button>
+        </div>
+
+        <div class="sec-head">
+          <h3>快速入口</h3>
+          <span class="sh-more" onclick="goInfoList()">全部
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </span>
+        </div>
+        <div class="cat-quick">
+          <div class="cat-item" onclick="goCategory('校园卡')">
+            <span class="cat-ic" style="background:#FBF0DA;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 14.5h4"/></svg></span>
+            <span class="cat-l">校园卡</span>
+          </div>
+          <div class="cat-item" onclick="goCategory('伞')">
+            <span class="cat-ic" style="background:#E4EEF8;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a8 8 0 0 1 8 8H4a8 8 0 0 1 8-8Z"/><path d="M12 12v6a2 2 0 0 0 4 0"/></svg></span>
+            <span class="cat-l">雨伞</span>
+          </div>
+          <div class="cat-item" onclick="goCategory('耳机')">
+            <span class="cat-ic" style="background:#F9E9EC;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13.5" width="4" height="6" rx="1.6"/><rect x="17" y="13.5" width="4" height="6" rx="1.6"/></svg></span>
+            <span class="cat-l">耳机</span>
+          </div>
+          <div class="cat-item" onclick="goCategory('书')">
+            <span class="cat-ic" style="background:#EDEAF6;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z"/></svg></span>
+            <span class="cat-l">书籍</span>
+          </div>
+        </div>
+
+        <div class="sec-head">
+          <h3>最新信息</h3>
+          <div class="mini-filter">
+            <button class="mf-pill on" data-seg="all" onclick="switchSeg('all')">全部</button>
+            <button class="mf-pill" data-seg="found" onclick="switchSeg('found')">招领</button>
+            <button class="mf-pill" data-seg="lost" onclick="switchSeg('lost')">寻物</button>
+            <button class="mf-pill reward" data-seg="reward" onclick="switchSeg('reward')">悬赏</button>
+          </div>
+        </div>
+        <div class="content">
+          <div class="list-wrap" id="home-list"></div>
+        </div>
+        </div><!-- /home-scroll -->
+        <div class="tabbar">
+          <button class="tab-item on" onclick="switchTab('home')">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+            <span>首页</span>
+          </button>
+          <button class="tab-item" onclick="goInfoList()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4"/></svg>
+            <span>信息</span>
+          </button>
+          <button class="tab-item pub" onclick="goPublish()">
+            <span class="tab-pub-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+            <span class="tab-label">发布</span>
+          </button>
+          <button class="tab-item" onclick="goMessages()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20l1-4.6A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+            <span>消息</span>
+          </button>
+          <button class="tab-item" onclick="switchTab('mine')">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            <span>我的</span>
+          </button>
+        </div>
+      </div>
+      <!-- ============ 页面：发布 ============ -->
+      <div class="page" id="page-publish">
+        <div class="navbar">
+          <button class="nav-back" onclick="backPage()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+          </button>
+          发布信息
+        </div>
+        <div class="content">
+          <div class="pub-type">
+            <div class="pub-type-card" id="pt-lost" onclick="selectPubType('lost')">
+              <div class="pub-type-icon" style="background:var(--lost-light);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D97D52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8 11h6"/></svg>
+              </div>
+              <span class="pt-name">寻物启事</span>
+              <span class="pt-desc">我的物品丢了<br>请大家帮忙留意</span>
+            </div>
+            <div class="pub-type-card" id="pt-found" onclick="selectPubType('found')">
+              <div class="pub-type-icon" style="background:var(--found-light);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+              <span class="pt-name">失物招领</span>
+              <span class="pt-desc">我捡到了物品<br>寻找失主归还</span>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-row">
+              <span class="form-label"><span class="req">*</span>物品名称</span>
+              <input class="form-input" id="f-name" maxlength="20" placeholder="如：校园卡、黑色雨伞、AirPods耳机">
+            </div>
+            <div class="form-row">
+              <span class="form-label"><span class="req">*</span>物品分类</span>
+              <div class="chips" id="f-category">
+                <span class="chip" onclick="selectCategory(this)">校园卡证件</span>
+                <span class="chip" onclick="selectCategory(this)">数码电子</span>
+                <span class="chip" onclick="selectCategory(this)">钥匙</span>
+                <span class="chip" onclick="selectCategory(this)">书籍文具</span>
+                <span class="chip" onclick="selectCategory(this)">水杯雨伞</span>
+                <span class="chip" onclick="selectCategory(this)">衣物配饰</span>
+                <span class="chip" onclick="selectCategory(this)">其他</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <span class="form-label"><span class="req">*</span><span id="f-place-label">丢失地点</span></span>
+              <div class="form-value placeholder" id="f-place" onclick="openSheet('place')">
+                <span>请选择或填写地点</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A6A094" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+              </div>
+            </div>
+            <div class="form-row">
+              <span class="form-label"><span class="req">*</span><span id="f-time-label">丢失时间</span></span>
+              <div class="form-value placeholder" id="f-time" onclick="openSheet('time')">
+                <span>请选择时间</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A6A094" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+              </div>
+            </div>
+            <div class="form-row" id="f-reward-row" style="display:none">
+              <span class="form-label">悬赏金额</span>
+              <div class="reward-chips" id="f-reward">
+                <button type="button" class="reward-chip on" data-r="0" onclick="selectReward(this)">无</button>
+                <button type="button" class="reward-chip" data-r="5" onclick="selectReward(this)">¥5</button>
+                <button type="button" class="reward-chip" data-r="10" onclick="selectReward(this)">¥10</button>
+                <button type="button" class="reward-chip" data-r="20" onclick="selectReward(this)">¥20</button>
+                <button type="button" class="reward-chip" data-r="50" onclick="selectReward(this)">¥50</button>
+                <button type="button" class="reward-chip" data-r="100" onclick="selectReward(this)">¥100</button>
+              </div>
+            </div>
+            <div class="form-row">
+              <span class="form-label">详细描述</span>
+              <textarea class="form-input" id="f-desc" maxlength="200" placeholder="补充物品颜色、特征、品牌等信息，便于辨认（选填）"></textarea>
+            </div>
+            <div class="form-row">
+              <span class="form-label"><span class="req">*</span>联系方式</span>
+              <input class="form-input" id="f-contact" maxlength="30" placeholder="微信号 / 手机号，方便对方联系你">
+            </div>
+            <div class="form-row">
+              <span class="form-label">物品图片</span>
+              <div class="form-field">
+                <div class="upload-area" id="f-images">
+                <div class="upload-box" onclick="pickLocalImage()">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A6A094" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="m21 15-4.5-4.5L6 21"/></svg>
+                  <span>添加图片</span>
+                </div>
+              </div>
+              <div class="ai-actions">
+                <button type="button" class="ai-photo-btn" onclick="pickPhotoRecognize()">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.2"/></svg>
+                  <span class="ai-btn-t">拍照识物</span>
+                  <span class="ai-btn-tag">AI·OCR</span>
+                </button>
+              </div>
+              <input type="file" id="f-file" accept="image/*" multiple style="display:none" onchange="onPickLocal(event)">
+              <input type="file" id="f-ai-file" accept="image/*" capture="environment" style="display:none" onchange="onPhotoRecognize(event)">
+                <div class="ai-result" id="ai-result" style="display:none"></div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="pub-footer">
+          <button class="btn-primary" onclick="submitPublish()">立即发布</button>
+        </div>
+      </div>
+      <!-- ============ 页面：校园地图 ============ -->
+      <div class="page" id="page-map">
+        <div class="navbar">
+          <button class="nav-back" onclick="backPage()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D1D1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          校园地图
+        </div>
+        <div class="content map-content">
+          <div class="map-tip">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5E9E74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            福州大学旗山校区 · 点击地图可放大查看
+          </div>
+          <div class="map-img-wrap" onclick="openMapZoom(event)">
+            <img src="assets/fzu-map.jpg" alt="福州大学旗山校区导览图">
+          </div>
+          <div class="map-hot">
+            <h3>高频遗失地点</h3>
+            <div class="map-hot-tags">
+              <span onclick="quickPlace('图书馆')">图书馆</span>
+              <span onclick="quickPlace('京元')">京元餐厅</span>
+              <span onclick="quickPlace('丁香园')">丁香园</span>
+              <span onclick="quickPlace('第一田径场')">第一田径场</span>
+              <span onclick="quickPlace('第二田径场')">第二田径场</span>
+              <span onclick="quickPlace('游泳馆')">游泳馆</span>
+              <span onclick="quickPlace('宏晖文体馆')">宏晖文体馆</span>
+              <span onclick="quickPlace('快递中心')">快递中心</span>
+              <span onclick="quickPlace('素拓中心')">素拓中心</span>
+              <span onclick="quickPlace('西三')">西三教学楼</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-zoom-mask" id="map-zoom-mask">
+          <div class="mz-topbar">
+            <span class="mz-hint">单指拖动查看地图</span>
+            <button class="mz-close" onclick="closeMapZoom()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              关闭
+            </button>
+          </div>
+          <div class="mz-scroll" id="mz-scroll" onclick="event.stopPropagation()">
+            <img src="assets/fzu-map.jpg" alt="福州大学旗山校区导览图（放大）">
+          </div>
+        </div>
+      </div>
+      <!-- ============ 页面：搜索 ============ -->
+      <div class="page" id="page-search">
+        <div class="search-bar">
+          <div class="search-input-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6A094" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="search-input" placeholder="搜索物品名称、分类、地点" onkeydown="if(event.key==='Enter')doSearch()">
+            <button class="search-camera" onclick="pickSearchPhoto()" title="拍照搜物">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.2"/></svg>
+            </button>
+          </div>
+          <button class="search-cancel" onclick="backPage()">取消</button>
+        <input type="file" id="s-ai-file" accept="image/*" capture="environment" style="display:none" onchange="onSearchPhoto(event)">
+        </div>
+        <div class="content">
+          <!-- 搜索引导（历史+热门） -->
+          <div id="search-guide">
+            <button class="photo-search-banner" onclick="pickSearchPhoto()">
+              <span class="psb-ic">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.2"/></svg>
+              </span>
+              <span class="psb-t"><b>拍照搜物</b><em>拍一张物品照片，AI 自动识别并搜索</em></span>
+              <svg class="psb-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <div class="search-section" id="hist-section">
+              <h3>搜索历史
+                <button class="clear-hist" onclick="clearHistory()">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6v14H5V6"/><path d="M10 11v5M14 11v5"/></svg>
+                  清空
+                </button>
+              </h3>
+              <div class="hist-tags" id="hist-tags"></div>
+            </div>
+            <div class="search-section">
+              <h3>热门搜索</h3>
+              <div class="hot-list" id="hot-list"></div>
+            </div>
+          </div>
+          <!-- 搜索结果 -->
+          <div id="search-result" style="display:none;">
+            <div class="search-result-head" id="result-head">找到 <b id="result-count">0</b> 条与“<b id="result-kw"></b>”相关的信息</div>
+            <div class="list-wrap" id="result-list" style="padding-top:6px;"></div>
+          </div>
+        </div>
+      </div>
+      <!-- ============ 页面：详情 ============ -->
+      <div class="page" id="page-detail">
+        <div class="navbar">
+          <button class="nav-back" onclick="backPage()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+          </button>
+          信息详情
+        </div>
+        <div class="content">
+          <div class="detail-hero" id="d-hero">
+            <img class="hero-img" id="d-hero-img" alt="物品图片" style="display:none">
+            <span id="d-emoji">🎴</span>
+            <div class="detail-type-banner" id="d-banner"></div>
+            <div class="detail-status-banner" id="d-status-banner"></div>
+          </div>
+          <div class="detail-body">
+            <div class="detail-title" id="d-title"></div>
+            <div class="detail-quick" id="d-quick"></div>
+            <div class="detail-reward" id="d-reward" style="display:none"></div>
+          </div>
+          <div class="detail-section">
+            <h4>基本信息</h4>
+            <div class="kv-list">
+              <div class="kv-row"><span class="kv-key">信息类型</span><span class="kv-val" id="d-type"></span></div>
+              <div class="kv-row"><span class="kv-key">物品分类</span><span class="kv-val" id="d-category"></span></div>
+              <div class="kv-row"><span class="kv-key" id="d-place-key">丢失地点</span><span class="kv-val" id="d-place"></span></div>
+              <div class="kv-row"><span class="kv-key" id="d-time-key">丢失时间</span><span class="kv-val" id="d-time"></span></div>
+              <div class="kv-row"><span class="kv-key">发布时间</span><span class="kv-val" id="d-pubtime"></span></div>
+            </div>
+          </div>
+          <div class="detail-section">
+            <h4>详细描述</h4>
+            <div class="detail-desc" id="d-desc"></div>
+          </div>
+          <div class="match-section" id="d-match-section" style="display:none">
+            <div class="match-head">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 4.6L19 9l-4.6 1.9L12 15l-2.4-4.1L5 9l5.1-1.4L12 3Z"/><path d="M19 14v4M17 16h4"/></svg>
+              <span>智能匹配</span>
+              <em id="d-match-count"></em>
+            </div>
+            <div id="d-match-list"></div>
+          </div>
+          <div class="detail-section">
+            <h4>发布者</h4>
+            <div class="publisher">
+              <div class="pub-avatar" id="d-avatar">
+                <img class="av-img" src="assets/avatar.jpg" alt="我的头像">
+                <span class="av-text">同</span>
+              </div>
+              <div class="pub-info">
+                <div class="p-name" id="d-pubname"></div>
+                <div class="p-dept" id="d-pubdept"></div>
+              </div>
+            </div>
+          </div>
+          <div style="height:10px;"></div>
+        </div>
+        <div class="detail-footer" id="d-footer"></div>
+      </div>
+      <!-- ============ 页面：站内聊天 ============ -->
+      <div class="page" id="page-chat">
+        <div class="navbar">
+          <button class="nav-back" onclick="backPage()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+          </button>
+          <div class="chat-nav-avatar" id="chat-nav-avatar">
+            <img class="cnav-img" src="assets/avatar.jpg" alt="头像">
+            <span class="cnav-text">同</span>
+          </div>
+          <div class="chat-nav-name" id="chat-nav-name">同学</div>
+        </div>
+        <div class="chat-body" id="chat-body">
+          <div class="chat-tip" id="chat-tip"></div>
+          <div class="chat-msgs" id="chat-msgs"></div>
+        </div>
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input" placeholder="发消息…" autocomplete="off">
+          <button id="chat-send" onclick="sendChat()">发送</button>
+        </div>
+      </div>
+      <!-- ============ 页面：消息中心 ============ -->
+      <div class="page" id="page-message">
+        <div class="navbar">
+          <button class="nav-back" onclick="backPage()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+          </button>
+          消息中心
+        </div>
+        <div class="content">
+          <div class="msg-list" id="msg-list"></div>
+        </div>
+      </div>
+      <!-- ============ 页面：我的 ============ -->
+      <div class="page" id="page-mine">
+        <div class="mine-header">
+          <div class="mine-avatar">
+            <img src="assets/avatar.jpg" alt="我的头像">
+          </div>
+          <div class="mine-user">
+            <div class="u-name">校园同学</div>
+            <div class="u-id">计算机与大数据学院 · 已认证学生</div>
+          </div>
+        </div>
+        <div class="mine-stats">
+          <div class="mine-stat" onclick="filterMine('all')">
+            <div class="num" id="ms-all">0</div>
+            <div class="lbl">我的发布</div>
+          </div>
+          <div class="mine-stat" onclick="filterMine('lost')">
+            <div class="num"><span class="n-lost" id="ms-lost">0</span></div>
+            <div class="lbl">寻物中</div>
+          </div>
+          <div class="mine-stat" onclick="filterMine('found')">
+            <div class="num"><span class="n-found" id="ms-found">0</span></div>
+            <div class="lbl">招领中</div>
+          </div>
+          <div class="mine-stat" onclick="filterMine('done')">
+            <div class="num"><span class="n-done" id="ms-done">0</span></div>
+            <div class="lbl">已完成</div>
+          </div>
+        </div>
+        <div class="love-card">
+          <span class="love-ic">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.6c1.5-1.6 2.5-3.2 2.5-5.1A4.4 4.4 0 0 0 12 5.1 4.4 4.4 0 0 0 2 7.5c0 1.9 1 3.5 2.5 5.1L12 20l7.5-7.4Z"/></svg>
+          </span>
+          <div class="love-info">
+            <div class="love-points"><b id="mine-points">60</b> 爱心积分</div>
+            <div class="love-d">归还物品、写感谢信都能获得积分，让善意传递</div>
+          </div>
+        </div>
+        <div class="mine-list-head">
+          <h3>我发布的信息</h3>
+          <div class="mine-filter" id="mine-filter">
+            <button class="on" data-mf="all" onclick="filterMine('all')">全部</button>
+            <button data-mf="active" onclick="filterMine('active')">进行中</button>
+            <button data-mf="done" onclick="filterMine('done')">已完成</button>
+          </div>
+        </div>
+        <div class="content">
+          <div class="list-wrap" id="mine-list" style="padding-top:4px;"></div>
+        </div>
+        <div class="thx-wall-head">
+          <h3>我的感谢信</h3>
+          <span class="thx-count" id="thx-count"></span>
+        </div>
+        <div class="thx-wall" id="thx-wall"></div>
+        <div class="tabbar">
+          <button class="tab-item" onclick="switchTab('home')">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+            <span>首页</span>
+          </button>
+          <button class="tab-item" onclick="goInfoList()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4"/></svg>
+            <span>信息</span>
+          </button>
+          <button class="tab-item pub" onclick="goPublish()">
+            <span class="tab-pub-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+            <span class="tab-label">发布</span>
+          </button>
+          <button class="tab-item" onclick="goMessages()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20l1-4.6A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+            <span>消息</span>
+          </button>
+          <button class="tab-item on" onclick="switchTab('mine')">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            <span>我的</span>
+          </button>
+        </div>
+      </div>
+      <!-- Toast -->
+      <div class="toast" id="toast"></div>
+
+      <!-- AI识别扫描遮罩 -->
+      <div class="scan-mask" id="scan-mask">
+        <div class="scan-box">
+          <div class="scan-img-wrap">
+            <img id="scan-img" alt="">
+            <div class="scan-line"></div>
+            <div class="scan-corner tl"></div><div class="scan-corner tr"></div>
+            <div class="scan-corner bl"></div><div class="scan-corner br"></div>
+          </div>
+          <div class="scan-status" id="scan-status">AI 正在识别…</div>
+          <div class="scan-sub" id="scan-sub">OCR 文字识别 · 图像特征分析</div>
+        </div>
+      </div>
+      <!-- 发布成功弹窗 -->
+      <div class="modal-mask" id="success-modal">
+        <div class="success-modal">
+          <div class="success-icon">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#1FA971" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h3 id="sm-title">发布成功</h3>
+          <p id="sm-desc">你的信息已发布，有同学看到后会尽快与你联系，请保持联系方式畅通。</p>
+          <div class="sm-btns" id="sm-btns">
+            <button class="sm-btn light" onclick="closeSuccess();switchTab('mine')">查看我的发布</button>
+            <button class="sm-btn dark" onclick="closeSuccess();switchTab('home')">返回首页</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 感谢信编辑弹窗 -->
+      <div class="modal-mask" id="thanks-modal">
+        <div class="thanks-sheet">
+          <div class="th-head">
+            <span class="th-title" id="th-title">写一封感谢信</span>
+            <button class="th-close" onclick="closeThanks()">×</button>
+          </div>
+          <div class="th-tip" id="th-tip">物品失而复得，向热心同学表达感谢吧</div>
+          <textarea class="th-text" id="th-text" maxlength="220"></textarea>
+          <div class="th-btns">
+            <button class="th-btn light" onclick="closeThanks()">暂不发送</button>
+            <button class="th-btn dark" id="th-submit" onclick="submitThanks()">发送感谢信</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部选择弹层 -->
+      <div class="sheet-mask" id="sheet-mask" onclick="closeSheet(event)">
+        <div class="sheet" onclick="event.stopPropagation()">
+          <div class="sheet-title" id="sheet-title">请选择</div>
+          <div class="sheet-options" id="sheet-options"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
+<!-- 业务脚本按依赖顺序加载：数据 → 基础能力 → 功能模块 → 启动 -->
+<script src="js/core/data.js"></script>
+<script src="js/core/navigation.js"></script>
+<script src="js/features/publish.js"></script>
+<script src="js/features/vision.js"></script>
+<script src="js/features/matching.js"></script>
+<script src="js/features/search.js"></script>
+<script src="js/features/photo-search.js"></script>
+<script src="js/features/detail.js"></script>
+<script src="js/features/gratitude.js"></script>
+<script src="js/features/chat.js"></script>
+<script src="js/features/profile.js"></script>
+<script src="js/features/messages.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

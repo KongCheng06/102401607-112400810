@@ -16,9 +16,12 @@ function goChat(id){
     chatLog.push({from:'other',text:'你好，我捡到了「'+d.name+'」，看到你在找，请问是你的吗？'});
     chatLog.push({from:'me',text:'你好，麻烦你了，我先确认一下物品细节'});
     chatLog.push({from:'other',text:'好的，你描述一下，我核对一下物品特征'});
-  }else{
+  }else if(d.mine){
     chatLog.push({from:'other',text:'你好，关于「'+d.name+'」，我看到你发布的信息，想了解一下'});
     chatLog.push({from:'me',text:'好的，你说，我帮忙核对'});
+  }else{
+    chatLog.push({from:'me',text:'你好，关于「'+d.name+'」，我看到你发布的信息，想了解一下'});
+    chatLog.push({from:'other',text:'好的，你说，我帮忙核对'});
   }
   renderChat();
   $('chat-input').value='';
@@ -27,7 +30,7 @@ function goChat(id){
 }
 function renderChat(){
   const d=DATA.find(x=>x.id===currentChatId);
-  const avChar=d?d.publisher.slice(0,1):'同';
+  const avChar=d?(d.mine?'同':d.publisher.slice(0,1)):'同';
   $('chat-msgs').innerHTML=chatLog.map(function(m){
     if(m.from==='me'){
       return '<div class="msg-row me"><div class="msg-bubble"></div><div class="msg-avatar me-av"></div></div>';

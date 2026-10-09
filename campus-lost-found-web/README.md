@@ -102,8 +102,7 @@ python -m http.server 8000
 
 ```text
 campus-lost-found-web/
-├── index.html                     # GitHub Pages 默认入口，自动跳转演示页
-├── 校园失物招领小程序.html       # 实际演示页，声明脚本加载顺序
+├── 校园失物招领小程序.html       # 实际演示页
 ├── assets/                         # 地图、头像等静态资源
 ├── css/
 │   ├── style.css                      # CSS 统一入口
